@@ -16,6 +16,7 @@ class Car{
     String model = "BMW X6";
 
     public int getPrice(int price){
+
         return this.price = price;
     }
 
