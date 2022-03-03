@@ -5,36 +5,43 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String command = "C";
-        while (command.equals("C")) {
-            Scanner scanner = new Scanner(System.in);
-
+        while (true) {
+            // Abstract level 1
             Arguments arguments = readArguments();
-            doCanculation(arguments);
-            command = scanner.next();
+            doCalculation(arguments);
+            checkExitOrContinue();
         }
     }
 
-    private static Arguments readArguments(){
+    private static Arguments readArguments() {
+        //Abstract level 2
+        System.out.println("Please enter first number: ");
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Pleas enter first number: ");
         int firstNumber = scanner.nextInt();
 
-        System.out.print("Pleas enter operation: ");
+        System.out.println("Enter operation: ");
         String operation = scanner.next();
 
-        System.out.print("Pleas enter first number: ");
+        System.out.println("Enter second number: ");
         int secondNumber = scanner.nextInt();
 
         return new Arguments(firstNumber, operation, secondNumber);
     }
 
-    private static void doCanculation(Arguments arguments){
-        final double result =
-                calc.calculate(firstNumber, secondNumber, operation.charAt(0));
-        System.out.println("Result of " + firstNumber + " " + operation.charAt(0) + " " + secondNumber
-                + " is " + result);
-        System.out.print("Pleas enter [C] to continue or [E] to exit ");
+    private static void doCalculation(Arguments args) {
+        //Abstract level 2
+        Calculator basicCalculator = new Calculator();
+        double result =
+                basicCalculator.calculate(args.num1, args.num2, args.operation.charAt(0));
+        System.out.println("Result of " + args.num1
+                + args.operation.charAt(0) + args.num2 + " is " + result);
+    }
+
+    private static void checkExitOrContinue() {
+        System.out.print("Please enter [E] to exit or any key to continue: ");
+        String command = new Scanner(System.in).next();
+        if (command.equalsIgnoreCase("E")) {
+            System.exit(0);
+        }
     }
 }
