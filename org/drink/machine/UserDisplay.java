@@ -27,11 +27,30 @@ public class UserDisplay {
             if (scanner.hasNext(productNumberPattern)) {
                 productNumber =  scanner.nextInt();
                 isCorrectValue = true;
-            } else {
-                isCorrectValue = false;
             }
+            scanner.nextInt();
         }
 
         return productNumber;
+    }
+
+    public void printPaymentPrompt(String productName, double price) {
+        System.out.println("Product " + productName + " price " + price);
+        System.out.println("Please pay with your card.");
+    }
+
+    public void printPaymentResult(boolean payResult) {
+        String res = payResult ? "Payment complete" : "Payment error" ;
+        System.out.println(res);
+//        if(payResult){
+//            System.out.println("Payment complete");
+//        } else {
+//            System.out.println("Payment error");
+//        }
+    }
+
+    public void printPurchaseResult(boolean result) {
+        String res = result ? "Pleas take your product" : "Product not avialable";
+        System.out.println(res);
     }
 }

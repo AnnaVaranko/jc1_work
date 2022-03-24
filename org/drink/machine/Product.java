@@ -30,4 +30,8 @@ public  class Product {
     public int getCount() {
         return count;
     }
+
+    public void decreaseCount(){
+        count--;
+    }
 }

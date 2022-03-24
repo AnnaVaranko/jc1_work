@@ -16,4 +16,16 @@ public class ProductStorage {
     public Product[] getProducts() {
         return products;
     }
+
+    public Product getProductByNumber(int productNumber) {
+        return products[productNumber - 1];
+    }
+
+    public boolean removeProduct(Product selectedProduct) {
+        if(selectedProduct.getCount() > 0){
+            selectedProduct.decreaseCount();
+            return true;
+        } else
+            return false;
+    }
 }
