@@ -6,36 +6,43 @@ import annotation.Version;
 public class DrinkAutomat {
 
     final private UserDisplay userDisplay;
-    final private ProductStorage productStorage;
+    final private ProductStorage<Beverage> productStorage;
 
     public DrinkAutomat() {
         this.userDisplay = new UserDisplay();
-        this.productStorage = new ProductStorage();
+
+        Beverage[] beverages = new Beverage[5];
+        beverages[0] = new Beverage("Coca-Cole", 2.00, 5, 0.5);
+        beverages[1] = new Beverage("Fanta", 2.00, 5, 0.33);
+        beverages[2] = new Beverage("Sprite", 2.00, 5, 0.25);
+        beverages[3] = new Beverage("FuseTea", 1.50, 5, 0.25);
+        beverages[4] = new Beverage("Bonaqua", 1.09, 5, 0.5);
+
+        this.productStorage = new ProductStorage<>(beverages);
     }
 
     public void work(){
         while (true) {
             showProducts();
-            Product selectedProduct = selectProduct();
+            Beverage selectedProduct = selectProduct();
             payProduct(selectedProduct);
-            giveProduct(selectedProduct);
+            if(!giveProduct(selectedProduct)) break;
 
         }
     }
-
 
     private void showProducts() {
         userDisplay.print(productStorage.getProducts());
     }
 
-    private Product selectProduct() {
+    private Beverage selectProduct() {
         userDisplay.promptSelectProduct();
         int productNumber = userDisplay.readProductNumber();
-        Product selectedProduct = productStorage.getProductByNumber(productNumber);
+        Beverage selectedProduct = productStorage.getProductByNumber(productNumber);
         return null;
     }
 
-    private boolean payProduct(Product selectedProduct) {
+    private boolean payProduct(Beverage selectedProduct) {
         String productName = selectedProduct.getName();
         double price = selectedProduct.getPrice();
         userDisplay.printPaymentPrompt(productName, price);
@@ -45,10 +52,10 @@ public class DrinkAutomat {
         return true;
     }
 
-    private void giveProduct(Product selectedProduct) {
+    private boolean giveProduct(Beverage selectedProduct) {
         boolean result = productStorage.removeProduct(selectedProduct);
         userDisplay.printPurchaseResult(result);
-
+        return true;
     }
 
 }

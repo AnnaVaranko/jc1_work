@@ -1,31 +1,26 @@
 package org.drink.machine;
 
-public class ProductStorage {
+public class ProductStorage<T extends Countable> {
 
-    private Product[] products;
+    private T[] products;
 
-    public ProductStorage() {
-        products = new Product[5];
-        products[0] = new Product("Coca-Cole", 2.00, 5);
-        products[1] = new Product("Fanta", 2.00, 5);
-        //products[2] = new Product("Sprite", 2.00, 5);
-        products[3] = new Product("FuseTea", 1.50, 5);
-        products[4] = new Product("Bonaqua", 1.09, 5);
+    public ProductStorage(T[] products) {
+        this.products = products;
     }
 
-    public Product[] getProducts() {
+    public T[] getProducts() {
         return products;
     }
 
-    public Product getProductByNumber(int productNumber) {
+    public T getProductByNumber(int productNumber) {
         return products[productNumber - 1];
     }
 
-    public boolean removeProduct(Product selectedProduct) {
-        if(selectedProduct.getCount() > 0){
-            selectedProduct.decreaseCount();
-            return true;
-        } else
+    public boolean removeProduct(T  selectedProduct ) {
+        if(selectedProduct.getCount() == 0) {
             return false;
+        }
+        selectedProduct.decreaseCount();
+        return true;
     }
 }
