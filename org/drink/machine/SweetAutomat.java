@@ -1,5 +1,7 @@
 package org.drink.machine;
 
+import java.util.Arrays;
+
 public class SweetAutomat {
     final private UserDisplay userDisplay;
     final private ProductStorage<Sweet> productStorage;
@@ -13,7 +15,7 @@ public class SweetAutomat {
         sweets[2] = new Sweet("Kit-Kat", 1.5, 5);
         sweets[3] = new Sweet("Alyonka", 2, 5);
 
-        productStorage = new ProductStorage<>(sweets);
+        productStorage = new ProductStorage<>(Arrays.asList(sweets));
     }
 
     public void work(){
@@ -27,7 +29,7 @@ public class SweetAutomat {
     }
 
     private void showProducts() {
-        userDisplay.print(productStorage.getProducts());
+        userDisplay.print(productStorage.getProducts().toArray(Product[]::new));
     }
 
     private Sweet selectProduct() {
