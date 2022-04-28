@@ -28,7 +28,7 @@ public class ArrayOperation {
         mass[0] = res;
     }
 
-    public Integer getResult(){
-
-    }
+//    public Integer getResult(){
+//
+//    }
 }
